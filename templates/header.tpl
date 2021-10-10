@@ -18,10 +18,10 @@
 
         <nav class="menu">
             <ul class="botonera">
-                <li><a href=index.html>Home</a></li>
-                <li><a href=motos.html>Motos</a></li>
-                <li><a href=accesorios.html>Accesorios</a></li>
-                <li><a href=contacto.html>Contacto</a></li>
+                <li><a href=index>Home</a></li>
+                <li><a href=motos>Motos</a></li>
+                <li><a href=accesorios>Accesorios</a></li>
+                <li><a href=contacto>Contacto</a></li>
             </ul>
         </nav>
     </header>

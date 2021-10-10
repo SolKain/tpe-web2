@@ -1,9 +1,9 @@
 <?php
-    require_once 'controller/motoController.php';
-
-
+    require_once './controller/motoController.php';
     
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
+
+    $motoController = new MotoController();
 
     //lee la accion
     if (!empty($_GET['action'])) {
@@ -13,12 +13,16 @@
     }
   
     $params = explode('/', $action);
-
-    switch($params(0)) {
+    switch($params[0]) {
          case 'home':
-        home();
+          $motoController->home();
+          break;
         case 'motos':
-          motos();
+          $motoController->getMotos();
+          break;
+        default:
+          $motoController->home();
+          break;
     }
 
 

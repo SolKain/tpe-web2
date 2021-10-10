@@ -16,6 +16,7 @@ function postMoto($color, $cilindrada, $tanque, $id_tipo_moto){
 function editMotoPorID($id_moto, $color, $cilindrada, $tanque, $id_tipo_moto){
     $sentencia = $this->db->prepare("UPDATE motos SET color=?, cilindrada=?, tanque=?, id_tipo_moto=? WHERE id_moto=?");
     $sentencia->execute(array($id_moto, $color, $cilindrada, $tanque, $id_tipo_moto));
+}
 
 
     function DeleteMotoPorID($id_moto){
@@ -28,6 +29,7 @@ function editMotoPorID($id_moto, $color, $cilindrada, $tanque, $id_tipo_moto){
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }
+
 }
 
 ?>

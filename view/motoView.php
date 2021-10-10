@@ -14,8 +14,9 @@ class motoView{
         $this->smarty->display('templates/home.tpl');
     }
 
-    function showMotos(){
-
+    function showMotos($motos){
+        $this->smarty->assign('motos', $motos);
+        $this->smarty->display('templates/motos.tpl');
     }
   
 }

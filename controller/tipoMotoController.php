@@ -39,4 +39,6 @@ class tipoMotoController{
             $tipoMotos = $this->model->listTipoMoto($id);
         }
     }
+
+    ?>
     

@@ -4,7 +4,7 @@ require_once './model/motoModel.php';
 require_once './view/motoView.php';
 
 
-class motoController{
+class MotoController{
 
     private $view;
     private $model;
@@ -30,9 +30,13 @@ class motoController{
 
     */
     
-    function Home(){
+    function home(){
       //  $this->checkLogginIn();
         $this->view->showHome();
+    }
+    
+    function getMotos(){
+        $this->view->showMotos($motos);
     }
 
     function insertarMoto(){
@@ -41,7 +45,7 @@ class motoController{
         $tanque = $_POST['tanque'];
         $idTipoMoto = $_POST['id_tipo_moto'];
 
-        $this->model->postMoto($color, $cilindrada, $tanque, $id_tipo_moto));
+        $this->model->postMoto($color, $cilindrada, $tanque, $id_tipo_moto);
 
         }
 
@@ -75,3 +79,4 @@ class motoController{
 
 
 }
+?>
