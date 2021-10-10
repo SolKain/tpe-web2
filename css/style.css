@@ -1,0 +1,513 @@
+.encabezado {
+    background-color: #333333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .btn_menu {
+    padding: 15px;
+  }
+  
+  .menu {
+    margin: 0px;
+    width: 100%;
+    background-color: #16a085;
+  }
+  
+  ul.botonera {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: none;
+    flex-direction: column;
+    border-bottom: 5px solid #333333;
+    font-family: arial;
+    letter-spacing: 1px;
+  }
+  
+  ul.botonera.show {
+    display: flex;
+  }
+  
+  ul.botonera li {
+    list-style: none;
+    margin: 0px 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 15px;
+  }
+  
+  ul.botonera li:hover {
+    background: #333333;
+  }
+  
+  ul.botonera li a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  ul.botonera li a:visited {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* botonera en modo escritorio */
+  
+  @media screen and (min-width: 660px) {
+    /* en desktop ocultamos siempre el boton del menu */
+    .btn_menu {
+      display: none;
+    }
+    /* cambiamos la direccion del flex */
+    ul.botonera {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .encabezado {
+      padding-bottom: 20px;
+      padding-left: 45%;
+      align-items: center;
+      width: auto;
+    }
+  }
+  
+  /* fin de botonera en modo escritorio */
+  
+  body {
+    background-color: rgb(229, 196, 153);
+  }
+  
+  a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  
+  h1 {
+    font-size: 40px;
+    margin: 0px;
+  }
+  
+  p {
+    font-size: 24px;
+    margin: 0px;
+  }
+  
+  .introduccion {
+    font-family: arial, 'Times New Roman', Times, serif;
+    margin-top: 50px;
+    margin-bottom: 100px;
+  }
+  
+  /*inicio imagenes de muestra*/
+  
+  .contenedor {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .contenedor img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  @media screen and (min-width: 660px) {
+    .contenedor {
+      flex-direction: row;
+      justify-content: space-around;
+    }
+    .contenedor img {
+      width: 300px;
+      height: 300px;
+      padding: 5px 30px 5px 10px;
+    }
+  }
+  
+  /*fin imagenes de muestra*/
+  
+  .subimg h4 {
+    font-size: 24px;
+  }
+  
+  .subimg {
+    margin-bottom: 100px;
+  }
+  
+  .subimg a:link {
+    text-decoration: none;
+  }
+  
+  .titulonoti {
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
+  }
+  
+  /*inicio noticias*/
+  
+  #contenedornoti {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 200px;
+  }
+  
+  #contenedornoti img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  #contenedornoti a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  #contenedornoti a:visited {
+    color: black;
+  }
+  
+  @media screen and (min-width: 660px) {
+    #contenedornoti {
+      flex-direction: row;
+    }
+    #contenedornoti article {
+      margin: 10px;
+    }
+    .izq {
+      width: 500px;
+      text-decoration: none;
+      flex-grow: 2;
+    }
+    .centro {
+      width: 500px;
+      text-decoration: none;
+      flex-grow: 2;
+    }
+    .der {
+      width: 500px;
+      text-decoration: none;
+      flex-grow: 2;
+    }
+  }
+  
+  /*fin noticias*/
+  
+  /*inicio tabla*/
+  
+  .filtros {
+    margin-bottom: 10px;
+  }
+  
+  .filtros input {
+    padding: 8px 15px;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #3CBC8D;
+    font-size: small;
+  }
+  
+  .btn-filtro {
+    font-weight: bold;
+    margin: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #3CBC8D;
+    font-size: medium;
+    margin-left: 50%;
+  }
+  
+  table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border: 3px solid black;
+    text-align: center;
+    margin-bottom: 10%;
+  }
+  .titulo-motor{
+    width: 60px;
+  }
+  thead th {
+    letter-spacing: 1px;
+    font-size: 10px;
+  }
+  
+  th, td {
+    font-size: 11px;
+    padding: 5px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+  }
+  
+  .Editar {
+    width: 50px;
+  }
+  
+  .Eliminar {
+    width: 65px;
+  }
+  
+  #input-tabla label {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
+  }
+  
+  #input-tabla input {
+    padding: 8px 15px;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #3CBC8D;
+    font-size: small;
+  }
+  
+  .botonesTabla {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .botonesTabla button {
+    font-weight: bold;
+    margin: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #3CBC8D;
+    font-size: medium;
+  }
+  
+  @media screen and (min-width: 660px) {
+    .filtros {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    .filtros label {
+      padding: 10px;
+    }
+    .filtros input {
+      font-size: 20px;
+    }
+    table {
+      width: 80%;
+      margin: 50px 50px 50px 150px;
+    }
+    thead th {
+      font-size: 24px;
+      padding: 10px;
+      width: 180px;
+    }
+    .titulo-motor{
+      width: 120px;
+    }
+    .body-tabla th{
+      font-size: 18px;
+    }
+    #input-tabla {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+    #input-tabla label {
+      padding: 10px;
+      
+    }
+    #input-tabla input {
+      font-size: 20px;
+    }
+    .botonesTabla {
+      margin-bottom: 20px;
+    }
+    .botonesTabla button {
+      margin: 10px;
+      padding: 10px;
+      font-size: large;
+    }
+  }
+  
+  /*fin tabla*/
+  
+  .subTabla {
+    margin-bottom: 100px;
+  }
+  
+  .linkcontacto {
+    text-decoration: none;
+    color: black;
+  }
+  
+  /*pagina motos*/
+  
+  #muestraMotos {
+    display: flex;
+    flex-direction: column;
+    margin: 0% 0% 5% 5%;
+  }
+  
+  #muestraMotos img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  @media screen and (min-width: 660px) {
+    #muestraMotos {
+      flex-direction: row;
+      justify-content: space-around;
+      margin: 0% 0% 5% 0%;
+    }
+    #muestraMotos img {
+      width: 300px;
+      height: 300px;
+    }
+  }
+  
+  /*pagina motos*/
+  
+  /*inicio pagina accesorios*/
+  
+  #accesorios {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .accesoriosListas {
+    justify-content: center;
+  }
+  
+  .cascos {
+    margin-bottom: 10px;
+  }
+  
+  .accesoriosListas .cascos, .indumentaria {
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid black;
+    padding: 10px;
+    width: 50%;
+  }
+  
+  .cascos ul {
+    list-style-type: square;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .indumentaria ul {
+    font-size: 16px;
+    list-style-type: circle;
+    font-weight: bold;
+  }
+  
+  .accesoriosImag img {
+    width: 70%;
+    padding: 15px;
+  }
+  
+  @media screen and (min-width: 660px) {
+    #accesorios {
+      flex-direction: row;
+      justify-content: center;
+    }
+    .accesoriosListas {
+      margin-right: 100px;
+    }
+    .accesoriosListas .cascos, .indumentaria {
+      margin-left: 100px;
+      margin-bottom: 100px;
+      width: 200px;
+    }
+    .cascos ul {
+      font-size: 20px;
+    }
+    .indumentaria ul {
+      font-size: 20px;
+    }
+    .accesoriosImag {
+      padding: 20px;
+    }
+    .accesoriosImag img {
+      width: 200px;
+      height: 200px;
+      padding: 20px;
+    }
+  }
+  
+  /*fin pagina accesorios*/
+  
+  .subListas {
+    margin-bottom: 100px;
+    font-style: italic;
+  }
+  
+  .subListas a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  
+  .arribaFormulario {
+    margin-top: 50px;
+    padding-bottom: 100px;
+  }
+  
+  /*inicio del formulario*/
+  
+  .formulario {
+    margin: auto;
+    width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    border: 3px solid black;
+    padding: 5px;
+  }
+  
+  @media screen and (min-width: 660px) {
+    .formulario {
+      width: 500px;
+      padding: 10px;
+    }
+  }
+  
+  /*fin del formulario*/
+  
+  footer {
+    margin-top: 100px;
+    background-color: #333333;
+    color: white;
+    display: flex;
+  }
+  
+  .footerIzq {
+    font-size: 16px;
+  }
+  
+  .footerDer {
+    font-size: 16px;
+    padding-left: 25px;
+  }
+  
+  .footerDer a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  @media screen and (min-width: 660px) {
+    footer {
+      margin-top: 200px;
+      justify-content: space-between;
+    }
+    .footerIzq {
+      padding-left: 20px;
+    }
+    .footerDer {
+      font-size: 20px;
+      padding-right: 20px;
+    }

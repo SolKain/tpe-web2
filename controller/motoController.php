@@ -14,7 +14,7 @@ class motoController{
         $this->model = new motoModel();
     }
 
-    function verificarAdministrador(){
+    /*function verificarAdministrador(){
 
         return $this->userModel->getAdministrador($_SESSION["user"]);
     }
@@ -35,6 +35,42 @@ class motoController{
         $this->view->showHome();
     }
 
+    function insertarMoto(){
+        $color = $_POST['color'];
+        $cilindrada = $_POST['cilindrada'];
+        $tanque = $_POST['tanque'];
+        $idTipoMoto = $_POST['id_tipo_moto'];
+
+        $this->model->postMoto($color, $cilindrada, $tanque, $id_tipo_moto));
+
+        }
+
+    function deleteMoto($params = null){
+          
+                $id = $params[':ID'];
+                $this->model->DeleteMotoPorID($id);
+                header("Location: ". TRENDS);
+           
+        }
+
+    function editMoto($params){
+                $color = $_POST['color'];
+                $cilindrada = $_POST['cilindrada'];
+                $tanque = $_POST['tanque'];
+                $idTipoMoto = $_POST['id_tipo_moto'];
+                $idMoto = $params[':ID']; 
+
+                $this->model->editMotoPorId($id, $color, $cilindrada, $tanque, $id_tipo_moto);
+
+
+
+    }  
+
+    function listarMoto($params){
+        $id = $params[":ID"];
+        
+        $motos = $this->model->listMoto($id);
+    }
     
 
 

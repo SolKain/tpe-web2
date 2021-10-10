@@ -8,31 +8,25 @@ function __construct(){
     $this->db = new PDO('mysql:host=localhost;'.'dbname=tpe-web2;charset=utf8', 'root', '');
 }
 
-function getTipoMoto(){
+function listTipoMoto(){
     $sentencia = $this->db->prepare("SELECT * FROM tipo_moto");
     $sentencia->execute();
     return $sentencia->fetchAll(PDO::FETCH_OBJ);
 }
 
-function consultaIdNombreContinente($nombreContinente){
-    $sentencia = $this->db->prepare("SELECT id_continente FROM continente WHERE nombre =" . "\"" . $nombreContinente . "\"");
-    $sentencia->execute();
-    return $sentencia->fetchAll(PDO::FETCH_OBJ);
+function postTipoMoto($tipoMoto){
+    $sentencia = $this->db->prepare("INSERT INTO tipo_moto(terreno) VALUES(?)");
+    $sentencia->execute(array($tipoMoto));
 }
 
-function postMoto($continente){
-    $sentencia = $this->db->prepare("INSERT INTO moto(id) VALUES(?)");
-    $sentencia->execute(array($continente));
+function deleteTipoMotoPorID($idTipoMoto){
+    $sentencia = $this->db->prepare("DELETE FROM tipo_moto WHERE id_tipo_moto=?");
+    $sentencia->execute(array($idTipoMoto));
 }
 
-function DeleteContinentePorID($id){
-    $sentencia = $this->db->prepare("DELETE FROM continente WHERE id_continente=?");
-    $sentencia->execute(array($id));
-}
-
-function editContinente($id, $continente){
-    $sentencia = $this->db->prepare("UPDATE continente SET nombre=" . "\"" . $continente . "\"" . "WHERE id_continente=$id");
-    $sentencia->execute();
+function editTipoMoto($idTipoMoto, $terreno){
+    $sentencia = $this->db->prepare("UPDATE tipo_moto SET terreno = ? WHERE id_tipo_moto = ? ");
+    $sentencia->execute(array($idTipoMoto, $terreno));
 }
 
 }

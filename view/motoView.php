@@ -13,6 +13,10 @@ class motoView{
     function showHome(){
         $this->smarty->display('templates/home.tpl');
     }
+
+    function showMotos(){
+
+    }
   
 }
 

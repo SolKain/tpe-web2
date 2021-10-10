@@ -1,23 +1,25 @@
 <?php
     require_once 'controller/motoController.php';
-    require_once 'RouterClass.php';
+
 
     
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/');
-    #define("LOGIN", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/login');
-    #define("LOGOUT", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/logout');
-    #define("TRENDS", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/trends');
-  #  define("MOTO", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/moto');
 
-    $r = new Router();
+    //lee la accion
+    if (!empty($_GET['action'])) {
+      $action = $_GET['action'];
+    }else {
+      $action = 'home'; //accion por defecto si no enviam
+    }
+  
+    $params = explode('/', $action);
 
-    //RUTAS DE LA TABLA TRENDS
-    $r->addRoute("home", "GET", "motoController", "Home");
-    
-  //  $r->addRoute("moto/edit/:id", "GET", "motoController", "EditMoto");
+    switch($params(0)) {
+         case 'home':
+        home();
+        case 'motos':
+          motos();
+    }
 
-    //RUTA POR DEFECTO
-    $r->setDefaultRoute("motoController", "Home");
 
-    $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']); 
 ?>
