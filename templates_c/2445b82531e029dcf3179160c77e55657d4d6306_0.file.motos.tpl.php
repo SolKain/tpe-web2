@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2021-10-11 00:08:02
+/* Smarty version 3.1.34-dev-7, created on 2021-10-11 23:58:13
   from 'C:\xampp\htdocs\tpe-web2\templates\motos.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_616364423f8046_34048691',
+  'unifunc' => 'content_6164b37569c828_74235092',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2445b82531e029dcf3179160c77e55657d4d6306' => 
     array (
       0 => 'C:\\xampp\\htdocs\\tpe-web2\\templates\\motos.tpl',
-      1 => 1633903569,
+      1 => 1633989491,
       2 => 'file',
     ),
   ),
@@ -22,51 +22,61 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:templates/footer.tpl' => 1,
   ),
 ),false)) {
-function content_616364423f8046_34048691 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6164b37569c828_74235092 (Smarty_Internal_Template $_smarty_tpl) {
 ?> <?php $_smarty_tpl->_subTemplateRender("file:templates/header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
 
-<section>
-        <div class="filtros">
-            <label>Filtro por tipo de motor: <input type="text" id="filtro-motor"></label>
-            <label>Filtro por deposito de combustible: <input type="text" id="filtro-deposito"></label>
-            <label>Filtro por cilindrada: <input type="text" id="filtro-cilindrada"></label>
-            <label>Filtro por velocidad: <input type="text" id="filtro-velocidad"></label>
-        </div>
-        <div>
-            <button id="button-filtro" class="btn-filtro">Filtrar</button>
-        </div>
 
-    </section>
+
     <section>
         <table>
             <thead>
                 <tr>
-                    <th class="titulo-motor">Motor</th>
-                    <th>Deposito de combustible</th>
-                    <th>Cilindrada</th>
-                    <th>Velocidad máxima</th>
-                    <th class="Editar">Editar</th>
-                    <th class="Eliminar">Eliminar</th>
+                 <th> Color </th>
+                <th>Cilindrada</th>
+                <th>Tanque</th>
+                <th>Tipo</th>
+                <th class="Editar">Editar</th>
+                <th class="Eliminar">Eliminar</th>
                 </tr>
             </thead>
-            <tbody id="tabla" class="body-tabla"></tbody>
+            <tbody id="tabla" class="body-tabla">
+            <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['motos']->value, 'moto');
+$_smarty_tpl->tpl_vars['moto']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['moto']->value) {
+$_smarty_tpl->tpl_vars['moto']->do_else = false;
+?>
+                <tr>
+                <td><?php echo $_smarty_tpl->tpl_vars['moto']->value->color;?>
+</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['moto']->value->cilindrada;?>
+</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['moto']->value->tanque;?>
+</td>
+                <td><?php echo $_smarty_tpl->tpl_vars['moto']->value->id_tipo_moto;?>
+</td>
+                <td><button class="btnEditar"><a href="edit/<?php echo $_smarty_tpl->tpl_vars['moto']->value->id;?>
+">Editar</a></button></td>
+                <td><button class="btnEliminar"><a href="delete/<?php echo $_smarty_tpl->tpl_vars['moto']->value->id;?>
+">Borrar</a></button></td>
+                <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+            </tbody>
         </table>
     </section>
 
-    <section id="input-tabla">
-        <label>Ingresar tipo de motor: <input type="text" id="input-motor"> </label>
-        <label>Ingresar deposito de combustible: <input type="text" id="input-deposito"> </label>
-        <label>Ingresar cilindrada: <input type="text" id="input-cilindrada"> </label>
-        <label>Ingresar velocidad maxima: <input type="text" id="input-velocidad"> </label>
-    </section>
 
-    <section class="botonesTabla">
-        <button id="button-agregar">Agregar</button>
-        <button id="button-mostrar">Mostrar</button>
-        <button id="button-mostrar3">Mostrar 3</button>
-    </section>
-
+     <form action="insert" method="POST" class="formTabla" id="formTabla" enctype="multipart/form-data">
+          <label for="">Ingresar color:</label> <input type="text" name="color" id="inputColor" placeholder="Blanco">
+          <label for="">Ingresar cilindrada:</label> <input type="text" name="cilindrada" id="inputCilindrada" placeholder="150">
+          <label for="">Ingresar tanque:</label> <input type="text" name="tanque" id="inputTanque" placeholder="10">
+          <label for="">Ingresar tipo:</label><input type="text" name="id_tipo_moto" id="inputTipoMoto" placeholder="1">
+          <div >
+            <button type="submit" id="">Agregar</button>
+          </div> 
+        </form>
 
     <section id=muestraMotos>
         <div class="ns200">

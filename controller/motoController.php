@@ -36,6 +36,7 @@ class MotoController{
     }
     
     function getMotos(){
+        $motos = $this -> model ->listMoto();
         $this->view->showMotos($motos);
     }
 
@@ -45,30 +46,28 @@ class MotoController{
         $tanque = $_POST['tanque'];
         $idTipoMoto = $_POST['id_tipo_moto'];
 
-        $this->model->postMoto($color, $cilindrada, $tanque, $id_tipo_moto);
-
+        $this->model->postMoto($color, $cilindrada, $tanque, $idTipoMoto);
+        $this->getMotos();
         }
 
-    function deleteMoto($params = null){
-          
-                $id = $params[':ID'];
-                $this->model->DeleteMotoPorID($id);
-                header("Location: ". TRENDS);
-           
+    function deleteMoto($id){
+            $this->model->DeleteMotoPorID($id);
+            header("Location: ". MOTOS);
         }
 
-    function editMoto($params){
+    function editMoto($idMoto){
                 $color = $_POST['color'];
                 $cilindrada = $_POST['cilindrada'];
                 $tanque = $_POST['tanque'];
                 $idTipoMoto = $_POST['id_tipo_moto'];
-                $idMoto = $params[':ID']; 
-
-                $this->model->editMotoPorId($id, $color, $cilindrada, $tanque, $id_tipo_moto);
-
-
-
+                $this->model->editMotoPorId($idMoto, $color, $cilindrada, $tanque, $idTipoMoto);
+                header("Location: ". MOTOS);
     }  
+
+    function goToEditMoto($id){
+        $this->view->showFormularioEdit($id);
+    }
+    
 
     function listarMoto($params){
         $id = $params[":ID"];

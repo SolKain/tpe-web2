@@ -2,7 +2,7 @@
 
 require_once './libs/Smarty.class.php';
 
-class motoView{
+class MotoView{
 
     private $smarty;
 
@@ -18,6 +18,12 @@ class motoView{
         $this->smarty->assign('motos', $motos);
         $this->smarty->display('templates/motos.tpl');
     }
+
+    function showFormularioEdit($idMoto){
+        $this->smarty->assign('idMoto', $idMoto);
+        $this->smarty->display('templates/formEditarMoto.tpl');
+    }
+
   
 }
 

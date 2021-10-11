@@ -17,14 +17,11 @@ class tipoMotoController{
         $idTipoMoto = $_POST['id_tipo_moto'];
         $this->model->postTipoMoto($idTipoMoto);
         $this->view->ShowHomeLocation();
-
-
     }
 
     function editarTipoMoto($params){
         $id = $params[':ID'];
         $terreno = $_POST['terreno'];
-
         $this->model->editTipoMoto($id, $terreno);
     }
 

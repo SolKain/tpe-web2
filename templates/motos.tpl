@@ -1,55 +1,43 @@
  {include file="templates/header.tpl"}
 
-<section>
-        <div class="filtros">
-            <label>Filtro por tipo de motor: <input type="text" id="filtro-motor"></label>
-            <label>Filtro por deposito de combustible: <input type="text" id="filtro-deposito"></label>
-            <label>Filtro por cilindrada: <input type="text" id="filtro-cilindrada"></label>
-            <label>Filtro por velocidad: <input type="text" id="filtro-velocidad"></label>
-        </div>
-        <div>
-            <button id="button-filtro" class="btn-filtro">Filtrar</button>
-        </div>
 
-    </section>
-    
+
     <section>
         <table>
             <thead>
                 <tr>
-                    <th class="titulo-motor">Motor</th>
-                    <th>Deposito de combustible</th>
-                    <th>Cilindrada</th>
-                    <th>Velocidad máxima</th>
-                    <th class="Editar">Editar</th>
-                    <th class="Eliminar">Eliminar</th>
+                 <th> Color </th>
+                <th>Cilindrada</th>
+                <th>Tanque</th>
+                <th>Tipo</th>
+                <th class="Editar">Editar</th>
+                <th class="Eliminar">Eliminar</th>
                 </tr>
             </thead>
             <tbody id="tabla" class="body-tabla">
-            {foreach $motos as $moto}
+            {foreach from = $motos item = $moto}
                 <tr>
                 <td>{$moto->color}</td>
-                 <td>{$moto->cilindrada}</td>
+                <td>{$moto->cilindrada}</td>
                 <td>{$moto->tanque}</td>
-                <td>{$moto->tipoMoto}</td>
-               
+                <td>{$moto->id_tipo_moto}</td>
+                <td><button class="btnEditar"><a href="edit/{$moto->id}">Editar</a></button></td>
+                <td><button class="btnEliminar"><a href="delete/{$moto->id}">Borrar</a></button></td>
+                {/foreach}
             </tbody>
         </table>
     </section>
 
-    <section id="input-tabla">
-        <label>Ingresar tipo de motor: <input type="text" id="input-motor"> </label>
-        <label>Ingresar deposito de combustible: <input type="text" id="input-deposito"> </label>
-        <label>Ingresar cilindrada: <input type="text" id="input-cilindrada"> </label>
-        <label>Ingresar velocidad maxima: <input type="text" id="input-velocidad"> </label>
-    </section>
 
-    <section class="botonesTabla">
-        <button id="button-agregar">Agregar</button>
-        <button id="button-mostrar">Mostrar</button>
-        <button id="button-mostrar3">Mostrar 3</button>
-    </section>
-
+     <form action="insert" method="POST" class="formTabla" id="formTabla" enctype="multipart/form-data">
+          <label for="">Ingresar color:</label> <input type="text" name="color" id="inputColor" placeholder="Blanco">
+          <label for="">Ingresar cilindrada:</label> <input type="text" name="cilindrada" id="inputCilindrada" placeholder="150">
+          <label for="">Ingresar tanque:</label> <input type="text" name="tanque" id="inputTanque" placeholder="10">
+          <label for="">Ingresar tipo:</label><input type="text" name="id_tipo_moto" id="inputTipoMoto" placeholder="1">
+          <div >
+            <button type="submit" id="">Agregar</button>
+          </div> 
+        </form>
 
     <section id=muestraMotos>
         <div class="ns200">
