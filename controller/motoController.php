@@ -26,7 +26,7 @@ class MotoController{
     function getMotos(){
         $motos = $this -> model ->listMoto();
         $tipos = $this -> tipoModel ->listTipoMoto();
-
+        
         $this->view->showMotos($motos, $tipos);
     }
     
@@ -38,17 +38,18 @@ class MotoController{
         $motos = $this -> model ->filtrarMotosPorAtributos($color, $cilindrada, $tanque, $terreno);
         $tipos = $this -> tipoModel ->listTipoMoto();   
         $this->view->showMotos($motos, $tipos);
-        }
+    }
 
     function insertarMoto(){  
-       $this->authHelper->checkLoggedIn(true);
+        $this->authHelper->checkLoggedIn(true);
         $color = $_POST['color'];
         $cilindrada = $_POST['cilindrada'];
         $tanque = $_POST['tanque'];
         $idTipoMoto = $_POST['id_tipo_moto'];
         $this->model->postMoto($color, $cilindrada, $tanque, $idTipoMoto);
-        $this->getMotos();
+        header("Location: ". MOTOS);
         }
+        
 
     function deleteMoto($params = null){
         $this->authHelper->checkLoggedIn(true);
@@ -73,11 +74,12 @@ class MotoController{
         $id = $params[':ID'];
         $this->view->showFormularioEdit($id);
     }
+    
     function getMotoParticular($params = null){
         $id = $params[':ID'];
         $moto = $this->model->getMotoParticular($id);
         $this->view->showMotoParticular($moto);
  
-       }
+    }
 }
 ?>

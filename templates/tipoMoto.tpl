@@ -5,7 +5,7 @@
         <thead>
             <tr>
                 <th> Terreno </th>
-                          {if $isLoggedIn}
+                          {if $isLoggedIn && $isAdmin}
                  <th class="Editar">Editar</th>
                 <th class="Eliminar">Eliminar</th>
                 {/if}
@@ -15,7 +15,7 @@
             {foreach from=$tipos item=$tipo}
                 <tr>
                     <td>{$tipo->terreno}</td>
-                              {if $isLoggedIn}
+                              {if $isLoggedIn && $isAdmin}
                     <td><button class="btnEditar"><a href="editTipo/{$tipo->id}">Editar</a></button></td>
                     <td><button class="btnEliminar"><a href="deleteTipo/{$tipo->id}">Borrar</a></button></td>
                     {/if}
@@ -25,7 +25,7 @@
     </table>
 </section> 
 
- {if $isLoggedIn}
+ {if $isLoggedIn && $isAdmin}
 <form action="insertTipo" method="POST" class="formTabla" id="formTablaTipo" enctype="multipart/form-data">
 <label for="">Ingresar terreno:</label> <input type="text" name="terreno" id="inputTerreno" placeholder="Arena">
  <div >

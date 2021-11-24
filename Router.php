@@ -17,7 +17,7 @@ define("LOGIN", 'http://' . $_SERVER["SERVER_NAME"] . ':' . $_SERVER["SERVER_POR
 
 $r = new Router();
 
-
+$r->addRoute("motoParticular/:ID", "GET", "motoController", "getMotoParticular");
 //Rutas tabla motos
 $r->addRoute("home", "GET", "motoController", "home");
 $r->addRoute("motos", "GET", "motoController", "getMotos");
@@ -32,13 +32,17 @@ $r->addRoute("logout", "GET", "usuarioController", "logout");
 $r->addRoute("user", "GET", "usuarioController", "getUsuarios");
 $r->addRoute("userEdit/:ID", "GET", "usuarioController", "showEditar");
 $r->addRoute("userDelete/:ID", "GET", "usuarioController", "deleteUsuario");
-$r->addRoute("cambiarPermiso/:ID", "GET", "usuarioController", "cambiarPermisos");
+$r->addRoute("cambiarPermiso/:ID", "POST", "usuarioController", "cambiarPermisos");
+
 
 $r->addRoute("filtrar", "POST", "motoController", "filtrarMotos");
 $r->addRoute("insert", "POST", "motoController", "insertarMoto");
 $r->addRoute("delete/:ID", "GET", "motoController", "deleteMoto");
 $r->addRoute("edit/:ID", "POST", "motoController", "editMoto");
 $r->addRoute("edit/:ID", "GET", "motoController", "goToEditMoto");
+
+
+
  /* case 'edit':
     if ($verb == 'POST') {
       $motoController->editMoto($params[1]);

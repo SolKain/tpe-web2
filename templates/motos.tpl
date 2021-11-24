@@ -1,7 +1,7 @@
  {include file="templates/header.tpl"}
 
          <div class="formFiltar">
-          {if $isLoggedIn}
+          {if $isLoggedIn && $isAdmin}
           <form action="filtrar" method="POST" class="formTabla" id="formTabla" enctype="multipart/form-data">
             <label for="">Filtrar por tipo:</label>
           <select name="id_tipo_moto">
@@ -28,7 +28,7 @@
                 <th>Tanque</th>
                 <th>Tipo</th>
 
-                 {if $isLoggedIn}
+                 {if $isLoggedIn && $isAdmin}
                 <th class="Editar">Editar</th>
                 <th class="Eliminar">Eliminar</th>
                 {/if}
@@ -41,7 +41,7 @@
                 <td>{$moto->cilindrada}</td>
                 <td>{$moto->tanque}</td>
                 <td><a href="motoParticular/{$moto->id}"> {$moto->terreno}</a></td>
-                {if $isLoggedIn}
+                {if $isLoggedIn && $isAdmin}
                 <td><button class="btnEditar"><a href="edit/{$moto->id}">Editar</a></button></td>
                 <td><button class="btnEliminar"><a href="delete/{$moto->id}">Borrar</a></button></td>
                 {/if}
@@ -50,7 +50,7 @@
         </table>
     </section>
 
-     {if $isLoggedIn}
+     {if $isLoggedIn && $isAdmin}
      <form action="insert" method="POST" class="formTabla" id="formTabla" enctype="multipart/form-data">
           <label for="">Ingresar color:</label> <input type="text" name="color" id="inputColor" placeholder="Blanco">
           <label for="">Ingresar cilindrada:</label> <input type="text" name="cilindrada" id="inputCilindrada" placeholder="150">

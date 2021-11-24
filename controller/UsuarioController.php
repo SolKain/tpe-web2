@@ -89,6 +89,7 @@ class UsuarioController
         $this->authHelper->checkLoggedIn(true);
         $id = $params[':ID'];
         $administrador = isset($_POST['administrador']);
+        
         $this->model->editPermisoUsuario($id, $administrador);
         header("Location: " . USUARIOS);
     }
