@@ -21,7 +21,16 @@
                 <li><a href=index>Home</a></li>
                 <li><a href=motos>Motos</a></li>
                 <li><a href=tipos>Tipos</a></li>
-                <li><a href=contacto>Contacto</a></li>
+                 {if $isLoggedIn && $isAdmin}
+                    <li><a href=user>Usuarios</a></li>
+                {/if}   
+    
+                {if !$isLoggedIn}
+                    <li><a href=login>Login</a></li>
+                {/if}                
+                {if $isLoggedIn}
+                    <li><a href=logout>Logout</a></li>
+                {/if}
             </ul>
         </nav>
     </header>

@@ -1,7 +1,24 @@
  {include file="templates/header.tpl"}
 
-
-
+         <div class="formFiltar">
+          {if $isLoggedIn}
+          <form action="filtrar" method="POST" class="formTabla" id="formTabla" enctype="multipart/form-data">
+            <label for="">Filtrar por tipo:</label>
+          <select name="id_tipo_moto">
+            <option value=0> Ninguno </option>
+            {foreach from = $tipos item = $tipo}
+             <option value={$tipo->id}> {$tipo->terreno} </option>
+            {/foreach}
+          </select>
+             <label for="">Color: </label><input type="text" name="color" id="inputColor" placeholder="Rojo">
+             <label for="">Cilindrdada: </label><input type="number" name="cilindrada" id="inputCilindrada" placeholder="200">
+             <label for="">Tanque: </label><input type="number" name="tanque" id="inputTanque" placeholder="15">
+          <div >
+            <button type="submit" id="">Filtrar</button>
+          </div> 
+        </form>
+            {/if}
+        </div>
     <section>
         <table>
             <thead>
@@ -10,8 +27,11 @@
                 <th>Cilindrada</th>
                 <th>Tanque</th>
                 <th>Tipo</th>
+
+                 {if $isLoggedIn}
                 <th class="Editar">Editar</th>
                 <th class="Eliminar">Eliminar</th>
+                {/if}
                 </tr>
             </thead>
             <tbody id="tabla" class="body-tabla">
@@ -20,24 +40,34 @@
                 <td>{$moto->color}</td>
                 <td>{$moto->cilindrada}</td>
                 <td>{$moto->tanque}</td>
-                <td>{$moto->id_tipo_moto}</td>
+                <td><a href="motoParticular/{$moto->id}"> {$moto->terreno}</a></td>
+                {if $isLoggedIn}
                 <td><button class="btnEditar"><a href="edit/{$moto->id}">Editar</a></button></td>
                 <td><button class="btnEliminar"><a href="delete/{$moto->id}">Borrar</a></button></td>
+                {/if}
                 {/foreach}
             </tbody>
         </table>
     </section>
 
-
+     {if $isLoggedIn}
      <form action="insert" method="POST" class="formTabla" id="formTabla" enctype="multipart/form-data">
           <label for="">Ingresar color:</label> <input type="text" name="color" id="inputColor" placeholder="Blanco">
           <label for="">Ingresar cilindrada:</label> <input type="text" name="cilindrada" id="inputCilindrada" placeholder="150">
           <label for="">Ingresar tanque:</label> <input type="text" name="tanque" id="inputTanque" placeholder="10">
-          <label for="">Ingresar tipo:</label><input type="text" name="id_tipo_moto" id="inputTipoMoto" placeholder="1">
+          <label for="">Ingresar tipo:</label>
+          <select name="id_tipo_moto">
+            {foreach from = $tipos item = $tipo}
+             <option value={$tipo->id}> {$tipo->terreno} </option>
+            {/foreach}
+            </select>
           <div >
             <button type="submit" id="">Agregar</button>
           </div> 
         </form>
+        {/if}
+
+
 
     <section id=muestraMotos>
         <div class="ns200">

@@ -36,3 +36,8 @@ CREATE TABLE IF NOT EXISTS usuarios(
     contrasenia VARCHAR (255) NOT NULL
 )
 
+alter table moto ADD CONSTRAINT 'fk_moto_tipo_moto' FOREIGN KEY (`id_tipo_moto`) REFERENCES `tipo_moto` (`id`) ON DELETE restrict ON UPDATE restrict;
+
+
+
+
