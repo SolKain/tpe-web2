@@ -1,10 +1,16 @@
 <?php
 require_once './controller/motoController.php';
+require_once './controller/tipoMotoController.php';
+
 
 define("BASE_URL", 'http://' . $_SERVER["SERVER_NAME"] . ':' . $_SERVER["SERVER_PORT"] . dirname($_SERVER["PHP_SELF"]) . '/');
-define("MOTOS", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]).'/motos');
+define("MOTOS", 'http://' . $_SERVER["SERVER_NAME"] . ':' . $_SERVER["SERVER_PORT"] . dirname($_SERVER["PHP_SELF"]) . '/motos');
+define("TIPOS", 'http://' . $_SERVER["SERVER_NAME"] . ':' . $_SERVER["SERVER_PORT"] . dirname($_SERVER["PHP_SELF"]) . '/tipos');
+
 
 $motoController = new MotoController();
+$tipoMotoController = new tipoMotoController();
+
 
 //lee la accion
 if (!empty($_GET['action'])) {
@@ -28,13 +34,32 @@ switch ($params[0]) {
     $motoController->deleteMoto($params[1]);
     break;
   case 'edit':
-    if ( $verb == 'POST'){
+    if ($verb == 'POST') {
       $motoController->editMoto($params[1]);
     } else {
-      $motoController->goToEditMoto($params[1]);  
+      $motoController->goToEditMoto($params[1]);
     }
-      break;        
-  default:
+    break;
+ 
+  case 'tipos':
+    $tipoMotoController->getTiposMotos();
+    break;
+  case 'insertTipo':
+    $tipoMotoController->insertTipoMoto();
+    break;
+  case 'deleteTipo':
+    $tipoMotoController->eliminarTipoMoto($params[1]);
+    break;
+  case 'editTipo':
+    if ($verb == 'POST') {
+      $tipoMotoController->editarTipoMoto($params[1]);
+    } else {
+      $tipoMotoController->goToEditTipo($params[1]);
+    }
+    break;
+    default:
     $motoController->home();
     break;
 }
+
+

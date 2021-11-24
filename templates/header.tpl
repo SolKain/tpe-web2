@@ -20,7 +20,7 @@
             <ul class="botonera">
                 <li><a href=index>Home</a></li>
                 <li><a href=motos>Motos</a></li>
-                <li><a href=accesorios>Accesorios</a></li>
+                <li><a href=tipos>Tipos</a></li>
                 <li><a href=contacto>Contacto</a></li>
             </ul>
         </nav>

@@ -20,13 +20,13 @@ function postTipoMoto($tipoMoto){
 }
 
 function deleteTipoMotoPorID($idTipoMoto){
-    $sentencia = $this->db->prepare("DELETE FROM tipo_moto WHERE id_tipo_moto=?");
+    $sentencia = $this->db->prepare("DELETE FROM tipo_moto WHERE id = ?");
     $sentencia->execute(array($idTipoMoto));
 }
 
 function editTipoMoto($idTipoMoto, $terreno){
-    $sentencia = $this->db->prepare("UPDATE tipo_moto SET terreno = ? WHERE id_tipo_moto = ? ");
-    $sentencia->execute(array($idTipoMoto, $terreno));
+    $sentencia = $this->db->prepare("UPDATE tipo_moto SET terreno = ? WHERE id = ? ");
+    $sentencia->execute(array($terreno, $idTipoMoto));
 }
 
 }
