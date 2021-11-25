@@ -1,96 +1,126 @@
-"use strict";
-const API_URL = "api/comentarios/" + id_moto;
+//document.addEventListener("DOMContentLoaded", function(){
+  let mainURL = 'http://localhost/tpe-web2/api/comentarios';
+  let subURL = 'http://localhost/tpe-web2/api/comentario/';
+  let postURL = 'http://localhost/tpe/api/tendencia/';
 
-let lista = new Vue({
-  el: "#lista",
-  data: {
-    titulo: "Comentarios de producto",
-    comentarios: [],
-  },
-  methods: {
-    filtrar: async function (event) {
-      event.preventDefault();
-      let formData = new FormData(filtro);
-      let puntaje = formData.get("puntaje");
-      try {
-        let response = await fetch(API_URL + "?puntaje=" + `${puntaje}`);
-        let comentarios = await response.json();
-        lista.comentarios = comentarios;
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    ordenarPor: async function (event) {
-      event.preventDefault();
-      let formData = new FormData(orden);
-      let atributo = formData.get("atributo");
-      let criterio = formData.get("criterio");
-      try {
-        let response = await fetch(API_URL + "?sort=" + `${atributo}` + "&order=" + `${criterio}`);
-        let comentarios = await response.json();
-        lista.comentarios = comentarios;
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    deleteComentario: async function (id_comentario) {
-      try {;
-        let respuesta = await fetch(`api/comentarios/${id_comentario}`, {
-          method: "DELETE",
-        });
-        if (respuesta.ok) {
-          console.log("Comentario eliminado");
-          getComentarios();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  function mostrarComentariosDeMoto(id){
+      fetch (mainURL,  {
+          "method" : "GET",
+          "mode" : "cors",
+      }).then(function(r){
+              if(!r.ok){
+              console.log(r)
+              }
+              return r.json();
+          })
+          .then(function(json) {
+              
+              actualizarTabla(json, id);
+          })
+          .catch(function(e){
+              console.log(e)
+          })
   }
-});
 
-async function getComentarios() {
-  try {
-    let response = await fetch(API_URL);
-    let comentarios = await response.json();
-    lista.comentarios = comentarios;
-  } catch (e) {
-    console.log(e);
+  function actualizarTabla(json, id){
+      let tabla = document.querySelector("#tablaComentarios");
+      let filas = document.querySelector("#columnas").rows[0].cells.length;
+      tabla.innerHTML = " ";
+      for (let index = 0; index<json.length; index++){
+          let comentarioActual = json[index];
+          let idJson = comentarioActual.id;
+          if(id == comentarioActual.idMoto){
+              if(filas == 3){
+                  tabla.innerHTML +=                     
+                  `<tr>
+                  <td>${comentarioActual.comentario}</td>
+                  <td>${comentarioActual.puntuacion}</td>
+                  <td><button class="btn-delete" id="${idJson}">Eliminar</button></td>
+                  </tr>`
+              }
+              else if(filas == 2){
+                  tabla.innerHTML +=                     
+                  `<tr>
+                  <td>${comentarioActual.comentario}</td>
+                  <td>${comentarioActual.puntuacion}</td>
+                  </tr>`
+              }
+          }
+      }
+      inicializarBoton();
+      setTimeout(idComentarios, 1);
   }
-}
 
-getComentarios();
+  
+  function insertarComentario(data){
+      fetch(subURL + data.idMoto, {
+          "method": "POST",
+          "mode": "cors",
+          "headers": { "Content-Type": "application/json" },
+          "body": JSON.stringify(data)
+      }).then(function (r) {
+          return r.json();
+      }).then(function (r) {
+          console.log(r);
+          mostrarComentariosDeMoto(data.idMoto);
+      });
+  }
 
-document.querySelector("#submitComentario").addEventListener("click", postComment);
-
-async function postComentario() {
-  let formData = new FormData(formComentarios);
-  let texto = formData.get("comentario");
-  let puntaje = formData.get("puntaje");
-
-  let id_usuario = document.querySelector("#formComentarios").dataset.id_usuario;
-  let fecha_actual = new Date();
-
-  let comentarioJSON = {
-    idMoto: id_moto,
-    id_usuario: id_usuario,
-    comentario: texto,
-    puntaje: puntaje,
-    fecha: (fecha_actual.getFullYear() + "/" + (fecha_actual.getMonth() + 1) + "/" + fecha_actual.getDate()),
+  function deleteComentario(id){
+      fetch(subURL + id, {
+          "method": "DELETE",
+          "mode": "cors",
+      }).then(function(r) {
+          if (!r.ok) {
+              console.log(e);
+          };
+          return r.json();
+      }).then(function () {
+          llamadoPrincipal();
+      });
   };
 
-  try {
-    let respuesta = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(comentarioJSON),
-    });
-    if (respuesta.ok) {
-      console.log("Comentario cargado");
-      getComentarios();
-    }
-  } catch (error) {
-    console.log(error);
+  function llamadoPrincipal(){
+      let tabla = document.querySelector("#tablaMoto");
+      let idMotoParticular = tabla.rows.item(0).cells[1].id;
+      
+      mostrarComentariosDeMoto(idMotoParticular);
   }
 
-}
+  function inicializarBoton(){
+      document.querySelectorAll(".btn-delete").forEach(element => element.addEventListener("click", function(){ 
+          deleteComentario(element.id);
+      }));  
+  }
+
+
+  llamadoPrincipal();
+
+  
+
+  function validarInsert(){
+      let comentario = document.querySelector("#comentario").value;
+      let puntuacion = document.querySelector("#puntuacion").value;
+      let tabla = document.querySelector("#tablaMoto");
+      let id_tendencia =  tabla.rows.item(0).cells[1].id;
+      if(comentario != "" && puntuacion != "" && (puntuacion <= 5) && (puntuacion >= 1)){
+          return (comentario && puntuacion && id_tendencia);
+      }
+      else{
+          return false;
+      }
+  }
+
+
+  function idComentarios(){
+      let tabla = document.querySelector("#tablaMoto");
+      let idMotoParticular = tabla.rows.item(0).cells[1].id;
+      document.querySelector("#formComentarios").action = "motoParticular/" + idMotoParticular;
+  }
+
+  
+  
+  
+  
+
+

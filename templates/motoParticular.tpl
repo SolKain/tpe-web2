@@ -1,6 +1,6 @@
  {include file="templates/header.tpl"}
 <section>
-        <table>
+        <table id="tablaMoto">
             <thead>
                 <tr>
                  <th> Color </th>
@@ -23,24 +23,22 @@
 
     <div id="lista">
 </div>
+<section>
+          <table>
+            <thead id="columnas">
+              <th>Comentario</th>
+              <th>Puntuacion</th>
+              {if $isLoggedIn && $isAdmin}
+              <th>Borrar</th>
+              {/if}
+            </thead>
+            <tbody  id="tablaComentarios">
+            </tbody>
+          </table>
 
-{if $rol == "user" || $rol == "admin"}
-<h2>Agregar comentario de producto</h2>
-  <form id="formComentarios" data-id_usuario="{$id_usuario}">
-    <h5>Bienvenido</h5>
-    <p name="usuario">{$usuario}</p>
-    <div class="mb-3">
-      <label class="form-label">Comentario</label>
-      <input type="text" name="comentario" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Puntaje</label>
-      <input type="text" name="puntaje" class="form-control">
-    </div>
-    <input id="submitComentario" type="submit" class="btn btn-primary">
-  </form>
-{/if}
+          {include file="templates/formComentarios.tpl"}
+</section>
 
-</div>
 <script src="js/comentarios.js"></script>
+
 {include file="templates/footer.tpl"}

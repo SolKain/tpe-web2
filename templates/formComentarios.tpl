@@ -1,4 +1,4 @@
-<form action="tendencia/:ID/comentarios" method="POST" class="formTabla" id="formComentarios">
+<form action="" method="POST" class="formTabla" id="formComentarios">
 
   <label for="">Comentario</label> <input type="text" name="comentario" id="comentario" placeholder="Comentario">
 
