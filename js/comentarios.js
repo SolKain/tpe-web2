@@ -8,7 +8,7 @@ let lista = new Vue({
     comentarios: [],
   },
   methods: {
-    filter: async function (event) {
+    filtrar: async function (event) {
       event.preventDefault();
       let formData = new FormData(filtro);
       let puntaje = formData.get("puntaje");
@@ -20,7 +20,7 @@ let lista = new Vue({
         console.log(e);
       }
     },
-    orderBy: async function (event) {
+    ordenarPor: async function (event) {
       event.preventDefault();
       let formData = new FormData(orden);
       let atributo = formData.get("atributo");
@@ -33,14 +33,14 @@ let lista = new Vue({
         console.log(e);
       }
     },
-    deleteComm: async function (id_comentario) {
+    deleteComentario: async function (id_comentario) {
       try {;
         let respuesta = await fetch(`api/comentarios/${id_comentario}`, {
           method: "DELETE",
         });
         if (respuesta.ok) {
           console.log("Comentario eliminado");
-          getComments();
+          getComentarios();
         }
       } catch (error) {
         console.log(error);
@@ -49,7 +49,7 @@ let lista = new Vue({
   }
 });
 
-async function getComments() {
+async function getComentarios() {
   try {
     let response = await fetch(API_URL);
     let comentarios = await response.json();
@@ -59,11 +59,11 @@ async function getComments() {
   }
 }
 
-getComments();
+getComentarios();
 
 document.querySelector("#submitComentario").addEventListener("click", postComment);
 
-async function postComment() {
+async function postComentario() {
   let formData = new FormData(formComentarios);
   let texto = formData.get("comentario");
   let puntaje = formData.get("puntaje");
@@ -87,7 +87,7 @@ async function postComment() {
     });
     if (respuesta.ok) {
       console.log("Comentario cargado");
-      getComments();
+      getComentarios();
     }
   } catch (error) {
     console.log(error);
