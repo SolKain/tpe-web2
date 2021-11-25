@@ -19,4 +19,5 @@
                          </tbody>
         </table>
     </section>
+    {include file="templates/formComentarios.tpl"}
      {include file="templates/footer.tpl"}

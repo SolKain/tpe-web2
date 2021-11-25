@@ -33,6 +33,7 @@
                 <th class="Eliminar">Eliminar</th>
                 {/if}
                 </tr>
+
             </thead>
             <tbody id="tabla" class="body-tabla">
             {foreach from = $motos item = $moto}

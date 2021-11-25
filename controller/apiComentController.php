@@ -1,40 +1,45 @@
 <?php
   require_once "model/comentariosModel.php";
-  require_once "api/view/apiView.php";
+  require_once "view/apiView.php";
   require_once "model/usuarioModel.php";
   require_once "helpers/authHelper.php";
 
 
-  class ApiComentController{
+  class apiComentController{
 
-    private $apiView;
-    private $commentModel;
+    private $view;
+    private $model;
     private $userModel;
     private $helper;
 
     function __construct(){
-        $this->commentModel = new ComentariosModel();
-        $this->apiView = new ApiView();
-        $this->userModel = new UsuarioModel();
-        $this->helper = new AuthHelper();
+        $this->model = new comentariosModel();
+        $this->view = new apiView();
+        $this->userModel = new usuarioModel();
+        $this->helper = new authHelper();
     }
+
     function getComentarios($params = null){
-            if(isset($_GET["puntaje"])){
-                $puntaje = $_GET["puntaje"];
-            } else {
-                $puntaje = true;
-            }
-            if(isset($_GET["sort"]) && isset($_GET["order"])){
-                $atributo = $_GET["sort"];
-                $criterio = $_GET["order"];
-            } else {
-                $atributo = "puntaje";
-                $criterio = "asc";
-            }
-                $id_producto = $params[":ID"];
-                $comentarios = $this->model->getComentarios($id_producto, $puntaje, $atributo, $criterio);
-                return $this->view->response($comentarios, 200);
+        $id_moto = $params[":ID"];
+        echo"$id_moto";
+        var_dump($id_moto);
+        die;
+        $comentarios = $this->model->getComentarios($id_moto);
+        if(!empty($comentarios)){
+            $this->view->response($comentarios, 200);
         }
+        else    
+            $this->view->response("No hay comentarios para el id:$id_moto", 404);
+    }
+
+    function getComentariosGenerales(){
+        $comentarios = $this->model->getComentariosGenerales();
+        if(!empty($comentarios)){
+            $this->view->response($comentarios, 200);
+        }
+        else{$this->view->response("No hay ningun comentario", 404);}
+        
+    }
 
     function getComentario($params = NULL){
         $body = $this->getBody();
@@ -46,11 +51,10 @@
         }
         else    
             $this->view->response("El comentario con id=$id no existe porfavor ingrese otro valor existente", 404);
-
     }
 
     function deleteComentario($params = null) {
-        if($this->authHelper->checkLoggedIn(true)){
+        //if($this->authHelper->checkLoggedIn(true)){
         $idComentario = $params[':ID'];
         $comentario = $this->model->getComentario($idComentario);
 
@@ -60,14 +64,16 @@
         }
         else 
             $this->view->response("El comentario id=$idComentario not found", 404);
+   // }
     }
-}
 
 
     function insertComentario($params = null){
-
         $body = $this->getBody();
-        $id_moto = $params[":ID"];
+        $id_moto = $params[':ID'];
+        var_dump($id_moto);
+        echo"$id_moto";
+        
 
         $idComentario = $this->model->postComentario($body->comentario, $body->puntuacion, $id_moto);
 
@@ -78,7 +84,6 @@
         else{
             $this->view->response("No se ha insertado el comentario", 404);
         }
-       
         
     }
 
