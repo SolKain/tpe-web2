@@ -1,7 +1,6 @@
 <?php
   require_once "model/comentariosModel.php";
   require_once "view/apiView.php";
-  require_once "model/usuarioModel.php";
   require_once "helpers/authHelper.php";
 
 
@@ -9,21 +8,16 @@
 
     private $view;
     private $model;
-    private $userModel;
     private $helper;
 
     function __construct(){
         $this->model = new comentariosModel();
         $this->view = new apiView();
-        $this->userModel = new usuarioModel();
         $this->helper = new authHelper();
     }
 
     function getComentarios($params = null){
         $id_moto = $params[":ID"];
-        echo"$id_moto";
-        var_dump($id_moto);
-        die;
         $comentarios = $this->model->getComentarios($id_moto);
         if(!empty($comentarios)){
             $this->view->response($comentarios, 200);
@@ -54,7 +48,7 @@
     }
 
     function deleteComentario($params = null) {
-        //if($this->authHelper->checkLoggedIn(true)){
+        if($this->helper->checkLoggedIn(true)){
         $idComentario = $params[':ID'];
         $comentario = $this->model->getComentario($idComentario);
 
@@ -64,16 +58,13 @@
         }
         else 
             $this->view->response("El comentario id=$idComentario not found", 404);
-   // }
+   }
     }
 
 
     function insertComentario($params = null){
         $body = $this->getBody();
         $id_moto = $params[':ID'];
-        var_dump($id_moto);
-        echo"$id_moto";
-        
 
         $idComentario = $this->model->postComentario($body->comentario, $body->puntuacion, $id_moto);
 
@@ -87,7 +78,7 @@
         
     }
 
-    private function getBody(){
+    function getBody(){
         $body = file_get_contents("php://input");
         return json_decode($body);
     }
