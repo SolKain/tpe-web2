@@ -6,11 +6,7 @@ $router = new Router();
 
 //funciona
 $router->addRoute('comentariosGenerales', 'GET', 'apiComentController', 'getComentariosGenerales');
-
-//funciona
 $router->addRoute('comentario/:ID', 'POST', 'apiComentController', 'insertComentario');
-
-//funciona
 $router->addRoute('comentarios/:ID', 'GET', 'apiComentController', 'getComentarios');
 $router->addRoute('comentario/:ID', 'DELETE', 'apiComentController', 'deleteComentario');
 
